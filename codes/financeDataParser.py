@@ -72,8 +72,8 @@ class FinanceDataParser:
         quotes = list()
         num = 0
         for stock_item in stock_items:
-            num += 1
             print('{step}.'.format(step=num), end='\t')
+            num += 1
             print('fetching quote history for \"{stock_item}\"'.format(stock_item=self._stock_items_dict[stock_item]))
             quotes.append(FinanceDataParser._retry(self._historical_finance)(stock_item, start_date))
         return np.array(quotes, dtype=self._dtype)

@@ -42,13 +42,19 @@ class DataDecorator:
         return df
 
     @staticmethod
-    def set_candelstick_data(df):
+    def set_candelstick_data(df, name, stock_item):
         trace = go.Candlestick(x=df.index,
                                open=df.open_prices,
                                high=df.high_prices,
                                low=df.low_prices,
                                close=df.close_prices)
-        return [trace]
+
+        layout = go.Layout(
+            title=name + ' : ' + stock_item
+        )
+        data = [trace]
+
+        return go.Figure(data=data, layout=layout)
 
     @staticmethod
     def show_cluster(edge_model, embedding, names, n_labels, labels):
