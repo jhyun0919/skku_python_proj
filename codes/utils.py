@@ -8,6 +8,7 @@ import plotly.graph_objs as go
 from sklearn import cluster, covariance, manifold
 from matplotlib.collections import LineCollection
 import matplotlib.pyplot as plt
+import matplotlib
 
 __author__ = "Park Jee Hyun"
 __copyright__ = "N.A."
@@ -27,7 +28,20 @@ class FinanceDataParser:
                        'formats': ['object', 'f4', 'f4', 'f4', 'f4', 'f4']}
         self._stock_items_dict = {'005930': 'naver',
                                   '035720': 'kakao',
-                                  '036570': 'ncsoft'}
+                                  '036570': 'ncsoft',
+                                  '005390': 'posco',
+                                  '004020': '현대제철',
+                                  '000660': 'sk하이닉스',
+                                  '034730': 'sk',
+                                  '017670': 'skt',
+                                  '030200': 'kt',
+                                  '066570': 'lg전자',
+                                  '032640': 'lg-Uplus',
+                                  '000150': '두산',
+                                  '000880': '한화',
+                                  '023530': '롯데쇼핑',
+                                  '002270': '롯데푸드',
+                                  '005380': '현대차'}
 
     def quotes_historical_finance(self, start_date=None):
         """
@@ -134,6 +148,7 @@ class DataDecorator:
         df = pd.DataFrame(data_dictionary)
         df = df.sort_values(by='market_dates')
         df = df.set_index('market_dates')
+        df = df[['close_prices', 'open_prices', 'high_prices', 'low_prices', 'volume']]
 
         return df
 
@@ -148,6 +163,7 @@ class DataDecorator:
 
     @staticmethod
     def show_cluster(edge_model, embedding, names, n_labels, labels):
+        matplotlib.rc('font', family="AppleGothic")
         # Visualization
         plt.figure(1, facecolor='w', figsize=(10, 8))
         plt.clf()
