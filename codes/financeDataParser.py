@@ -58,8 +58,9 @@ class FinanceDataParser:
                                   '139480': '이마트',
                                   '071840': '하이마트',
                                   '012450': '한화테크윈',
-                                  '079550': 'LIG넥스원',
-                                  '030520': '한글과컴퓨터'}
+                                  '030520': '한글과컴퓨터',
+                                  '041510': 'SM엔터',
+                                  '035900': 'JYP엔터'}
 
     def quotes_historical_finance(self, start_date=None):
         """
