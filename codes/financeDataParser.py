@@ -7,8 +7,8 @@ import numpy as np
 __author__ = "Park Jee Hyun"
 __copyright__ = "N.A."
 __credits__ = ["Park Jee Hyun"]
-__license__ = "GPL"
-__version__ = "1.0.1"
+__license__ = "BSD 3 clause"
+__version__ = "1.0.2"
 __maintainer__ = "Park Jee Hyun"
 __email__ = "jhyun19@gmail.com"
 __status__ = "Production"
