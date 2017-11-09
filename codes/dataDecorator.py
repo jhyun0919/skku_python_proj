@@ -54,7 +54,7 @@ class DataDecorator:
     def show_cluster(edge_model, embedding, names, n_labels, labels):
         matplotlib.rc('font', family="AppleGothic")
         # Visualization
-        plt.figure(1, facecolor='w', figsize=(10, 8))
+        plt.figure(1, facecolor='w', figsize=(13, 10))
         plt.clf()
         ax = plt.axes([0., 0., 1., 1.])
         plt.axis('off')
@@ -86,9 +86,7 @@ class DataDecorator:
 
         # Add a label to each node. The challenge here is that we want to
         # position the labels to avoid overlap with other labels
-        for index, (name, label, (x, y)) in enumerate(
-                zip(names, labels, embedding.T)):
-
+        for index, (name, label, (x, y)) in enumerate(zip(names, labels, embedding.T)):
             dx = x - embedding[0]
             dx[index] = 1
             dy = y - embedding[1]
