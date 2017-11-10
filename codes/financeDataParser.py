@@ -20,7 +20,16 @@ class FinanceDataParser:
         self._start_date = '2017.01.01'
         self._dtype = {'names': ['date', 'open', 'high', 'low', 'close', 'volume'],
                        'formats': ['object', 'f4', 'f4', 'f4', 'f4', 'f4']}
-        self._stock_items_dict = {'035420': '네이버',
+        self._stock_items_dict = {'042660': '대우조선해양',
+                                  '011200': '현대상선',
+                                  '010140': '삼성중공업',
+                                  '009540': '현대중공업',
+                                  '096770': 'sk이노베이션',
+                                  '010950': 'S오일',
+                                  '051910': 'LG화학',
+                                  '051900': 'LG생활건강',
+                                  '090430': '아모레퍼시픽',
+                                  '035420': '네이버',
                                   '035720': '카카오',
                                   '036570': 'ncsoft',
                                   '005390': 'posco',
@@ -60,7 +69,8 @@ class FinanceDataParser:
                                   '012450': '한화테크윈',
                                   '030520': '한글과컴퓨터',
                                   '041510': 'sm엔터',
-                                  '035900': 'JYP엔터'}
+                                  '035900': 'JYP엔터'
+                                  }
 
     def quotes_historical_finance(self, start_date=None):
         """
