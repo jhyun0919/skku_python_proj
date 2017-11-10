@@ -21,7 +21,6 @@ class FinanceDataParser:
         self._dtype = {'names': ['date', 'open', 'high', 'low', 'close', 'volume'],
                        'formats': ['object', 'f4', 'f4', 'f4', 'f4', 'f4']}
         self._stock_items_dict = {'042660': '대우조선해양',
-                                  '011200': '현대상선',
                                   '010140': '삼성중공업',
                                   '009540': '현대중공업',
                                   '096770': 'sk이노베이션',
@@ -53,7 +52,6 @@ class FinanceDataParser:
                                   '047810': '한국한공우주',
                                   '015760': '한국전력',
                                   '036460': '한국가스공사',
-                                  '028050': '삼성엔지니어',
                                   '004800': '효성',
                                   '001040': 'CJ',
                                   '097950': 'CJ제일제당',
