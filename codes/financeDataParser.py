@@ -64,7 +64,8 @@ class FinanceDataParser:
 
     def quotes_historical_finance(self, start_date=None):
         """
-        parse historical finance data of the stock-items during the period from start-date to present
+        parse historical finance data of the stock-items
+         during the period from start-date to present
         :param start_date: start date parsing term
         :return: quotes ['date', 'open', 'high', 'low', 'close', 'volume']
         """
@@ -76,12 +77,14 @@ class FinanceDataParser:
             num += 1
             print('fetching quote history for', end=' ')
             print('\"{stock_item}\"'.format(stock_item=self._stock_items_dict[stock_item]))
-            quotes.append(FinanceDataParser._retry(self._historical_finance)(stock_item, start_date))
+            quote = FinanceDataParser._retry(self._historical_finance)(stock_item, start_date)
+            quotes.append(quote)
         return np.array(quotes, dtype=self._dtype)
 
     def _historical_finance(self, stock_item, start_date=None):
         """
-        parse historical finance data of the stock-item during the period from start-date to present
+        parse historical finance data of the stock-item
+         during the period from start-date to present
         :param stock_item: stock item id number
         :param start_date: start date parsing term
         :return: quote ['date', 'open', 'high', 'low', 'close', 'volume']
@@ -108,15 +111,21 @@ class FinanceDataParser:
             is_check_none = None
             for i in range(1, len(srlists) - 1):
                 if srlists[i].span != is_check_none:
-                    date = datetime.strptime(srlists[i].find_all("td", align="center")[0].text, fmt).date()
+                    raq_date = srlists[i].find_all("td", align="center")[0].text
+                    date = datetime.strptime(raq_date, fmt).date()
                     if not date >= start_date:
                         return finance_data
-                    close_price = float(locale.atof(srlists[i].find_all("td", class_="num")[0].text))
-                    open_price = float(locale.atof(srlists[i].find_all("td", class_="num")[2].text))
-                    high_price = float(locale.atof(srlists[i].find_all("td", class_="num")[3].text))
-                    low_price = float(locale.atof(srlists[i].find_all("td", class_="num")[4].text))
-                    volume = float(locale.atof(srlists[i].find_all("td", class_="num")[5].text))
-                    finance_data.append((date, open_price, high_price, low_price, close_price, volume))
+                    raw_close = srlists[i].find_all("td", class_="num")[0].text
+                    close_p = float(locale.atof(raw_close))
+                    raw_open = srlists[i].find_all("td", class_="num")[2].text
+                    open_p = float(locale.atof(raw_open))
+                    raw_high = srlists[i].find_all("td", class_="num")[3].text
+                    high_p = float(locale.atof(raw_high))
+                    raw_low = srlists[i].find_all("td", class_="num")[4].text
+                    low_p = float(locale.atof(raw_low))
+                    raw_volume = srlists[i].find_all("td", class_="num")[5].text
+                    volume = float(locale.atof(raw_volume))
+                    finance_data.append((date, open_p, high_p, low_p, close_p, volume))
 
     @staticmethod
     def _retry(f, n_attempts=3):

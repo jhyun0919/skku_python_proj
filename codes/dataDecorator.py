@@ -21,6 +21,7 @@ class DataDecorator:
 
     @staticmethod
     def set_dataframe(idx, quotes):
+        col_names = ['close_prices', 'open_prices', 'high_prices', 'low_prices', 'volume']
         market_dates = np.vstack([q['date'] for q in quotes])
         open_prices = np.vstack([q['open'] for q in quotes])
         high_prices = np.vstack([q['high'] for q in quotes])
@@ -34,10 +35,12 @@ class DataDecorator:
                            'low_prices': list(low_prices[idx]),
                            'close_prices': list(close_prices[idx]),
                            'volume': list(volume[idx])}
-        df = pd.DataFrame(data_dictionary).sort_values(by='market_dates').set_index('market_dates')
-        df = df[['close_prices', 'open_prices', 'high_prices', 'low_prices', 'volume']]
 
-        return df
+        df = pd.DataFrame(data_dictionary)\
+            .sort_values(by='market_dates')\
+            .set_index('market_dates')
+
+        return df[col_names]
 
     @staticmethod
     def set_candelstick_data(df, name, stock_item):
