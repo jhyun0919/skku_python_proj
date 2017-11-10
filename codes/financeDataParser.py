@@ -72,12 +72,12 @@ class FinanceDataParser:
         stock_items, names = np.array(sorted(self._stock_items_dict.items())).T
         quotes = list()
         num = 0
-        for stock_item in stock_items:
+        for item in stock_items:
             print('{step}.'.format(step=num), end='\t')
             num += 1
             print('fetching quote history for', end=' ')
-            print('\"{stock_item}\"'.format(stock_item=self._stock_items_dict[stock_item]))
-            quote = FinanceDataParser._retry(self._historical_finance)(stock_item, start_date)
+            print('\"{stock_item}\"'.format(stock_item=self._stock_items_dict[item]))
+            quote = FinanceDataParser._retry(self._historical_finance)(item, start_date)
             quotes.append(quote)
         return np.array(quotes, dtype=self._dtype)
 
@@ -101,7 +101,7 @@ class FinanceDataParser:
         mp = max_page[0].find_all("td", class_="pgRR")
         mpNum = int(mp[0].a.get('href')[-3:])
 
-        finance_data = list()
+        quote = list()
         locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
         for page in range(1, mpNum + 1):
             url = self._url + str(stock_item) + '&page=' + str(page)
@@ -114,7 +114,7 @@ class FinanceDataParser:
                     raq_date = srlists[i].find_all("td", align="center")[0].text
                     date = datetime.strptime(raq_date, fmt).date()
                     if not date >= start_date:
-                        return finance_data
+                        return quote
                     raw_close = srlists[i].find_all("td", class_="num")[0].text
                     close_p = float(locale.atof(raw_close))
                     raw_open = srlists[i].find_all("td", class_="num")[2].text
@@ -125,7 +125,7 @@ class FinanceDataParser:
                     low_p = float(locale.atof(raw_low))
                     raw_volume = srlists[i].find_all("td", class_="num")[5].text
                     volume = float(locale.atof(raw_volume))
-                    finance_data.append((date, open_p, high_p, low_p, close_p, volume))
+                    quote.append((date, open_p, high_p, low_p, close_p, volume))
 
     @staticmethod
     def _retry(f, n_attempts=3):
