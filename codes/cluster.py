@@ -23,7 +23,7 @@ class Cluster:
         close_prices = np.vstack([q['close'] for q in quotes])
         variation = close_prices - open_prices
         # the names
-        names = FinanceDataParser().get_names()
+        names = FinanceDataParser().get_stock_names()
 
         # learn a graphical structure from the correlations
         edge_model = covariance.GraphLassoCV()

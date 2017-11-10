@@ -69,10 +69,10 @@ class FinanceDataParser:
         :param start_date: start date parsing term
         :return: quotes ['date', 'open', 'high', 'low', 'close', 'volume']
         """
-        stock_items, names = np.array(sorted(self._stock_items_dict.items())).T
+        items = self.get_stock_items()
         quotes = list()
         num = 0
-        for item in stock_items:
+        for item in items:
             print('{step}.'.format(step=num), end='\t')
             num += 1
             print('fetching quote history for', end=' ')
@@ -150,7 +150,7 @@ class FinanceDataParser:
         stock_items, _ = np.array(sorted(self._stock_items_dict.items())).T
         return stock_items
 
-    def get_names(self):
+    def get_stock_names(self):
         _, names = np.array(sorted(self._stock_items_dict.items())).T
         return names
 
