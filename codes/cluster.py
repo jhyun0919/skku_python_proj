@@ -25,15 +25,13 @@ class Cluster:
         # the names
         names = FinanceDataParser().get_names()
 
-        # Learn a graphical structure from the correlations
+        # learn a graphical structure from the correlations
         edge_model = covariance.GraphLassoCV()
-        # standardize the time series: using correlations rather than covariance
-        # is more efficient for structure recovery
         X = variation.copy().T
         X /= X.std(axis=0)
         edge_model.fit(X)
 
-        # Cluster using affinity propagation
+        # cluster using affinity propagation
         _, labels = cluster.affinity_propagation(edge_model.covariance_)
         n_labels = labels.max()
         for i in range(n_labels + 1):

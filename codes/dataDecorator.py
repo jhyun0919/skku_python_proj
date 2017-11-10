@@ -34,9 +34,7 @@ class DataDecorator:
                            'low_prices': list(low_prices[idx]),
                            'close_prices': list(close_prices[idx]),
                            'volume': list(volume[idx])}
-        df = pd.DataFrame(data_dictionary)
-        df = df.sort_values(by='market_dates')
-        df = df.set_index('market_dates')
+        df = pd.DataFrame(data_dictionary).sort_values(by='market_dates').set_index('market_dates')
         df = df[['close_prices', 'open_prices', 'high_prices', 'low_prices', 'volume']]
 
         return df
@@ -48,10 +46,7 @@ class DataDecorator:
                                high=df.high_prices,
                                low=df.low_prices,
                                close=df.close_prices)
-
-        layout = go.Layout(
-            title=name + ' : ' + stock_item
-        )
+        layout = go.Layout(title=name + ' : ' + stock_item)
         data = [trace]
 
         return go.Figure(data=data, layout=layout)
