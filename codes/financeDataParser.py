@@ -145,13 +145,6 @@ class FinanceDataParser:
 
     @staticmethod
     def _retry(f, n_attempts=3):
-        """
-        Wrapper function to retry function calls in case of exceptions
-        :param f:
-        :param n_attempts:
-        :return:
-        """
-
         def wrapper(*args, **kwargs):
             for i in range(n_attempts):
                 try:
