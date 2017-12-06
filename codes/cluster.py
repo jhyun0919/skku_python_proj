@@ -22,6 +22,7 @@ class Cluster:
         open_prices = np.vstack([q['open'] for q in quotes])
         close_prices = np.vstack([q['close'] for q in quotes])
         variation = close_prices - open_prices
+
         # the names
         names = FinanceDataParser().get_stock_names()
 

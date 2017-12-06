@@ -21,7 +21,7 @@ class DataDecorator:
 
     @staticmethod
     def set_dataframe(idx, quotes):
-        col_names = ['close_prices', 'open_prices', 'high_prices', 'low_prices', 'volume']
+        # stack data
         market_dates = np.vstack([q['date'] for q in quotes])
         open_prices = np.vstack([q['open'] for q in quotes])
         high_prices = np.vstack([q['high'] for q in quotes])
@@ -29,6 +29,7 @@ class DataDecorator:
         close_prices = np.vstack([q['close'] for q in quotes])
         volume = np.vstack([q['volume'] for q in quotes])
 
+        # set a dictionary
         data_dictionary = {'market_dates': list(market_dates[idx]),
                            'open_prices': list(open_prices[idx]),
                            'high_prices': list(high_prices[idx]),
@@ -36,27 +37,35 @@ class DataDecorator:
                            'close_prices': list(close_prices[idx]),
                            'volume': list(volume[idx])}
 
-        df = pd.DataFrame(data_dictionary)\
-            .sort_values(by='market_dates')\
+        # convert the dictionary to pandas df
+        df = pd.DataFrame(data_dictionary) \
+            .sort_values(by='market_dates') \
             .set_index('market_dates')
 
-        return df[col_names]
+        # sort the columns
+        col_names = ['close_prices', 'open_prices', 'high_prices', 'low_prices', 'volume']
+        df = df[col_names]
+
+        return df
 
     @staticmethod
     def set_candelstick_data(df, name, stock_item):
+        # set a figure
+        layout = go.Layout(title=name + ' : ' + stock_item)
         trace = go.Candlestick(x=df.index,
                                open=df.open_prices,
                                high=df.high_prices,
                                low=df.low_prices,
                                close=df.close_prices)
-        layout = go.Layout(title=name + ' : ' + stock_item)
         data = [trace]
 
         return go.Figure(data=data, layout=layout)
 
     @staticmethod
     def show_cluster(edge_model, embedding, names, n_labels, labels):
+        # set a font
         matplotlib.rc('font', family="AppleGothic")
+
         # Visualization
         plt.figure(1, facecolor='w', figsize=(13, 10))
         plt.clf()
