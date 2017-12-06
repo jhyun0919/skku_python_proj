@@ -129,6 +129,7 @@ class FinanceDataParser:
                     date = datetime.strptime(raw_date, fmt).date()
                     if not date >= start_date:
                         return quote
+
                     raw_close = src_list[i].find_all("td", class_="num")[0].text
                     close_p = float(locale.atof(raw_close))
                     raw_open = src_list[i].find_all("td", class_="num")[2].text
@@ -139,6 +140,7 @@ class FinanceDataParser:
                     low_p = float(locale.atof(raw_low))
                     raw_volume = src_list[i].find_all("td", class_="num")[5].text
                     volume = float(locale.atof(raw_volume))
+
                     quote.append((date, open_p, high_p, low_p, close_p, volume))
 
     @staticmethod
