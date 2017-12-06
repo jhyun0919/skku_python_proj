@@ -73,18 +73,12 @@ class FinanceDataParser:
         :param start_date: start date parsing term
         :return: quotes ['date', 'open', 'high', 'low', 'close', 'volume']
         """
-        # 기업들의 금융데이터 기록을 긁어오는 함수로서
-        # for문을 돌면서
-        # __init__에 선언된 모든 기업의 데이터를 긁어오는 구조이다
-        # for 문 안에넌 _historical_finance 함수가 한번씩 호출되는 구조이다
-        # start_data를 따로 입력해주지 않으면, __init__에서 정의된 날짜부터 파싱을 해오며,
-        # 따로 입력해주면 그 날짜부터 파싱을 해오는 구조.
-        #
         items = self.get_stock_items()
         quotes = list()
         num = 0
+        print('> parsing historical finance data')
         for item in items:
-            print('{step}.'.format(step=num), end='\t')
+            print('\t- index_num : {step}.'.format(step=num), end='\t')
             num += 1
             print('fetching quote history for', end=' ')
             print('\"{stock_item}\"'.format(stock_item=self._stock_items_dict[item]))
@@ -100,11 +94,6 @@ class FinanceDataParser:
         :param start_date: start date parsing term
         :return: quote ['date', 'open', 'high', 'low', 'close', 'volume']
         """
-        # quotes_historical_finance 함수 안에 있는 for문 안에서 호출되는 함수이며,
-        # 함수 parameter로 입력된 기업의 듬융데이터를,
-        # start_date부터 파싱해오는 구조이다.
-        # 이 함수 안에서 beatifulsoup가 사용되었다.
-        #
         if start_date is None:
             start_date = self._start_date
         fmt = "%Y.%m.%d"
