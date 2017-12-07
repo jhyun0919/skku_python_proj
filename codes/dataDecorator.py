@@ -29,7 +29,7 @@ class DataDecorator:
         close_prices = np.vstack([q['close'] for q in quotes])
         volume = np.vstack([q['volume'] for q in quotes])
 
-        # set a dictionary
+        # set a dictionary of selected company's data
         data_dictionary = {'market_dates': list(market_dates[idx]),
                            'open_prices': list(open_prices[idx]),
                            'high_prices': list(high_prices[idx]),
