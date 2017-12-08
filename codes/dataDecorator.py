@@ -59,7 +59,9 @@ class DataDecorator:
                                close=df.close_prices)
         data = [trace]
 
-        return go.Figure(data=data, layout=layout)
+        fig = go.Figure(data=data, layout=layout)
+
+        return fig
 
     @staticmethod
     def show_cluster(edge_model, embedding, names, n_labels, labels):
