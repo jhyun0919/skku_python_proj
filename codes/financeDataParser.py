@@ -4,14 +4,16 @@ from datetime import datetime
 import locale
 import numpy as np
 
-__author__ = "Park Jee Hyun"
-__copyright__ = "N.A."
-__credits__ = ["Park Jee Hyun"]
+__author__ = "Park Jee Hyun", "Mun Hyun Gyu", "Ahn ho geun"
+__copyright__ = "Copyright 2017, SKKU Term Project"
+__credits__ = ["Park Jee Hyun", "Mun Hyun Gyu", "Ahn ho geun"]
 __license__ = "BSD 3 clause"
-__version__ = "1.0.2"
+__version__ = "2.0.0"
 __maintainer__ = "Park Jee Hyun"
 __email__ = "jhyun19@gmail.com"
-__status__ = "Production"
+
+__reference__ = "http://estenpark.tistory.com/353", \
+                "http://scikit-learn.org/stable/auto_examples/applications/plot_stock_market.html"
 
 
 class FinanceDataParser:
